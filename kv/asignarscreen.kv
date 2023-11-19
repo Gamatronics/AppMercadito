@@ -17,8 +17,11 @@
             Button:
                 id: ok
                 text:"Ok"
+                on_press: 
+                    #print(root.item.source, root.customer.text)
+                    root.match_photo(root.customer.text, root.item.source)
                 on_release: 
-                    root.match_photo()
+                    root.dismiss()
             Button:
                 text:"Cancelar"
                 on_release: root.dismiss()
@@ -63,7 +66,7 @@
             size_hint:0.25,0.2
             #on_press: root.match_photo()
             on_press:
-                p = Factory.MyPopup()
+                p = Factory.MyPopup(item=pic_assign, customer=assignee)
                 p.send_info_to_popup(assignee, pic_assign)
                 p.open()
                 

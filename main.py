@@ -4,6 +4,8 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.button import ButtonBehavior
 from kivy.uix.image import Image
 from kivy.uix.popup import Popup
+from kivy.properties import ObjectProperty
+
 import os
 import csv
 
@@ -18,10 +20,13 @@ class HomeScreen(Screen):
     pass
 
 class MyPopup(Popup):
-    def match_photo(self, image):
-        cliente = self.ids.assignee.text
-        #pic = image.ids.pic_assign.source
-        print(cliente,image)
+
+    item = ObjectProperty()
+    customer = ObjectProperty()
+
+    def match_photo(self, customer, image):
+        
+        write_to_csv(customer, image)
 
     def send_info_to_popup(self, name, image):
         self.ids.label_confirm.text = f"Deseas confirmar a {name.text}?"
@@ -47,7 +52,8 @@ class Asignar(Screen):
         print(cliente,pic)
         #write_to_csv(cliente, pic)
     
-    
+    def what_i_need(self):
+        print(self.ids.pic_assign.source)
 
 
         

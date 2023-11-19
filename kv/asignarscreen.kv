@@ -1,3 +1,31 @@
+#:import Factory kivy.factory.Factory
+<MyPopup@Popup>
+    auto_dismiss: False
+    size_hint: 0.6, 0.3
+    #pos_hint: {"x":0.2, "top":0.9}
+    title: 'Confirmacion'
+
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            id: label_confirm
+            text:'Deseas confirmar?'
+        GridLayout:
+            cols: 2
+            size_hint: 0.7,0.45
+            pos_hint: {"x":0.15}
+            Button:
+                id: ok
+                text:"Ok"
+                on_press: 
+                    #print(root.item.source, root.customer.text)
+                    root.match_photo(root.customer.text, root.item.source)
+                on_release: 
+                    root.dismiss()
+            Button:
+                text:"Cancelar"
+                on_release: root.dismiss()
+
 <Asignar>:
     BoxLayout:
         padding:10
@@ -18,16 +46,30 @@
                 on_press: root.move_forward(is_forward=True)
         GridLayout:
             cols: 2
-            size_hint: 0.9,0.15
+            size_hint: 0.9,0.10
             Label:
-                text:'Asignar a:'
+                text:'Asignar:'
+                font_size: 32
+
             TextInput:
                 id: assignee
                 text:''
+                #halign: 'center'
+                #valign: 'middle'
+                font_size: 32
+
                 
         Button:
             text:
                 "Aceptar"
             pos_hint:{'center_x':0.5}
             size_hint:0.25,0.2
+            #on_press: root.match_photo()
+            on_press:
+                p = Factory.MyPopup(item=pic_assign, customer=assignee)
+                p.send_info_to_popup(assignee, pic_assign)
+                p.open()
+                
+            
+
         

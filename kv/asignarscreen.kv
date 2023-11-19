@@ -3,8 +3,19 @@
         padding:10
         spacing:10
         orientation:"vertical"
-        Label:
-            text:'Placeholder for image carousel'
+        Carousel:
+            direction: "right"
+            Image:
+                id: carousel_images
+                source: "kv/images/logo_mercadito.png"
+
+            Image:
+                id: carousel_images
+                source: "kv/images/pass.png"
+
+            Image:
+                id: carousel_images
+                source: "kv/images/marketing.png"
         GridLayout:
             cols: 2
             size_hint: 0.9,0.15

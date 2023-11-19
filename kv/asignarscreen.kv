@@ -3,8 +3,19 @@
         padding:10
         spacing:10
         orientation:"vertical"
-        Label:
-            text:'Placeholder for image carousel'
+        GridLayout:
+            cols: 3
+            Button:
+                size_hint: 0.1, 0.35
+                text:'<<'
+                on_press: root.move_forward(is_forward=False)
+            Image:
+                id: pic_assign
+                source:'kv/images/logo_mercadito.png'
+            Button:
+                size_hint: 0.1, 0.35
+                text:'>>'
+                on_press: root.move_forward(is_forward=True)
         GridLayout:
             cols: 2
             size_hint: 0.9,0.15

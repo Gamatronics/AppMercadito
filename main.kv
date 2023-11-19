@@ -1,0 +1,22 @@
+#:include kv/homescreen_xx.kv
+#:include kv/asignarscreen.kv
+#:include kv/verfotosscreen.kv
+#:include kv/verclientesscreen.kv
+
+
+GridLayout:
+    cols: 1
+    ScreenManager:
+        id: screen_manager
+        HomeScreen:
+            name: "home_screen"
+            id: home_screen
+        Asignar:
+            name: "asignar_screen"
+            id: asignar_screen
+        VerClientes:
+            name: "ver_clientes_screen"
+            id: ver_clientes_screen
+        VerFotos:
+            name: "ver_fotos_screen"
+            id: ver_fotos_screen

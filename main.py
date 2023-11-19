@@ -10,7 +10,19 @@ class HomeScreen(Screen):
 
 
 class Asignar(Screen):
-    pass
+    index = 0
+    def move_forward(self, is_forward):
+        
+        file_list = os.listdir('appmercadito/kv/images')
+        list_length = len(file_list)
+        if is_forward and self.index < list_length - 1:
+            self.index += 1
+        elif (not is_forward and self.index > 0):
+            self.index -= 1
+        self.ids.pic_assign.source = f'kv/images/{file_list[self.index]}'
+        
+        
+        
 
 class VerClientes(Screen):
     pass
@@ -34,5 +46,6 @@ class MainApp(App):
         #screen_manager.transition
         screen_manager.current = screen_name
         #screen_manager = self.root.ids
+    
 
 MainApp().run()

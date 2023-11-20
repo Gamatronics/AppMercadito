@@ -45,7 +45,7 @@ def remove_replace(count, client_list):
             passed_list.pop(index)
             passed_list.insert(index,'')
         indices[key] = index_list
-    return indices
+    return indices, passed_list
 
 def find_duplicates(client_list):
     length = len(client_list)

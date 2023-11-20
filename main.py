@@ -15,6 +15,38 @@ def write_to_csv(client, pic):
         writer.writerow([client, pic])
         csvfile.close()
     
+def duplicated(client_list):
+    newlist = [] # empty list to hold unique elements from the list
+    duplist = [] # empty list to hold the duplicate elements from the list
+    index_duplicated = []
+    for i in client_list:
+        if i not in newlist:
+            newlist.append(i)
+        else:
+            duplist.append(i,) # this method catches the first duplicate entries, and appends them to the list
+            index_duplicated.append(client_list.index(i))
+    return set(duplist)
+
+def count_repetitions(reps, client_list):
+    count = {}
+    for x in reps:
+        count[x] = client_list.count(x)
+    return count
+
+def remove_replace(count, client_list):
+    passed_list = client_list.copy()
+    indices = {}
+    keys_list = list(count.keys())
+    for key in keys_list:
+        index_list = []
+        for i in range(count[key]):
+            index = passed_list.index(key)
+            index_list.append(index)
+            passed_list.pop(index)
+            passed_list.insert(index,'')
+        indices[key] = index_list
+    return indices
+
 def find_duplicates(client_list):
     length = len(client_list)
     myset = set(client_list)
@@ -121,19 +153,15 @@ class MainApp(App):
         with open('appmercadito/kv/data.csv', newline='') as f:
             reader = csv.reader(f)
             database = []
-            x = []
+            clientes = []
             for row in reader:
                 database.append(row)
-                x.append(Clientes(row[0], row[1]))
-            print(find_duplicates(database))
-            quit()
-            for y in range(0,len(x)):
-                print(x[y].client)
-
-        clients = []
-        for client in database:
-            clients.append(client[0])
-        print(clients)
+                clientes.append(row[0])
+        if find_duplicates(clientes):
+            duplicates = duplicated(clientes)
+            print(remove_replace(count_repetitions(duplicates, clientes), clientes))
+            
+         
     
 
 MainApp().run()

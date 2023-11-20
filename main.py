@@ -15,9 +15,15 @@ def write_to_csv(client, pic):
         writer.writerow([client, pic])
         csvfile.close()
     
+def find_duplicates(client_list):
+    length = len(client_list)
+    myset = set(client_list)
+    if length != myset:
+        return True
+    return False
 
 class HomeScreen(Screen):
-    pass
+   pass
 
 class MyPopup(Popup):
 
@@ -30,7 +36,7 @@ class MyPopup(Popup):
 
     def send_info_to_popup(self, name, image):
         self.ids.label_confirm.text = f"Deseas confirmar a {name.text}?"
-        print(image.source)
+
         
         
 
@@ -54,6 +60,31 @@ class Asignar(Screen):
     
     def what_i_need(self):
         print(self.ids.pic_assign.source)
+
+class Clientes:
+
+    client_count = 0
+
+    def __init__(self, client, items):
+        self.client = client
+        self.items = items
+        Clientes.client_count += 1
+    
+    def get_number_of_items(self):
+        return len(self.items)
+    
+    def add_item(self):
+        pass
+    
+    def delete_client(self):
+        Clientes.client_count -= 1
+        
+
+    def delete_item(self):
+        pass
+    
+    def get_number_of_items(self):
+        pass
 
 
         
@@ -85,6 +116,24 @@ class MainApp(App):
         cliente = self.ids.assignee.text
         pic = self.ids.pic_assign.source
         write_to_csv(cliente, pic)
+    
+    def instantiate_client_objects(self):
+        with open('appmercadito/kv/data.csv', newline='') as f:
+            reader = csv.reader(f)
+            database = []
+            x = []
+            for row in reader:
+                database.append(row)
+                x.append(Clientes(row[0], row[1]))
+            print(find_duplicates(database))
+            quit()
+            for y in range(0,len(x)):
+                print(x[y].client)
+
+        clients = []
+        for client in database:
+            clients.append(client[0])
+        print(clients)
     
 
 MainApp().run()

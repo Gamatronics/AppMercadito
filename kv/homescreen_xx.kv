@@ -30,7 +30,10 @@
             font_size: 32
             size_hint: 0.5,0.5
             pos_hint: {"center_x":0.5}
-            on_release: app.change_screen('ver_clientes_screen')
+            on_release: 
+                app.change_screen('ver_clientes_screen')
+                app.instantiate_client_objects()
+
         Button:
             text: "Ver Fotos"
             font_size: 32

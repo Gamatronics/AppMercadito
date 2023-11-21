@@ -88,7 +88,13 @@ def objects_from_csv(repeated_list, database):
 
 
 class HomeScreen(Screen):
-   pass
+
+    def send_data(self):
+        data = Clientes.client_names
+        names = ''
+        for x in data:
+            names = f"{names} {x}\n"
+        self.manager.get_screen('ver_clientes_screen').ids.list_of_clients.text = names
 
 class MyPopup(Popup):
 
@@ -129,11 +135,13 @@ class Asignar(Screen):
 class Clientes:
 
     client_count = 0
+    client_names = []
 
     def __init__(self, client, items):
         self.client = client
         self.items = items
         Clientes.client_count += 1
+        Clientes.client_names.append(client)
     
     def get_number_of_items(self):
         return len(self.items)
@@ -141,8 +149,9 @@ class Clientes:
     def add_item(self):
         pass
     
-    def delete_client(self):
+    def delete_client(self, name):
         Clientes.client_count -= 1
+        Clientes.client_names.remove(name)
         
 
     def delete_item(self):
@@ -169,6 +178,8 @@ GUI = Builder.load_file("main.kv")
 class MainApp(App):
     def build(self):
         return GUI
+    
+    
     
     def change_screen(self, screen_name):
         # Get screen manager from kv file
@@ -198,6 +209,7 @@ class MainApp(App):
             repeated_list, original_list = remove_replace(count_repetitions(duplicates, clientes), clientes)
         objects_from_csv(repeated_list, database)
         print(Clientes.client_count)
+        print(Clientes.client_names)
         
             
          

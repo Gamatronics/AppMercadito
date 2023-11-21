@@ -1,12 +1,12 @@
 #:import utils kivy.utils
 <HomeScreen>:
-
+    
     BoxLayout:
         orientation:'vertical'
         size: root.width, root.height
         spacing: 10
         padding: 10
-
+        
         Image:
             source:'kv/images/logo_mercadito.png'
 
@@ -33,6 +33,7 @@
             on_release: 
                 app.change_screen('ver_clientes_screen')
                 app.instantiate_client_objects()
+                root.send_data()
 
         Button:
             text: "Ver Fotos"

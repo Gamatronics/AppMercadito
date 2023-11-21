@@ -1,5 +1,22 @@
 <VerClientes>:
-    Button:
-        text:
-            "Ver Clientes"
+    BoxLayout:
+        padding: 10
+        spacing: 10
+        orientation: 'vertical'
+        GridLayout:
+            cols: 2
+            size_hint: 0.9, 0.1
+            
+            Label:
+                text:'Cliente'
+                font_size: 32
+                
+            Label:
+                text:'Numero de Articulos'
+                font_size: 32
+                
+        Label:
+            id: list_of_clients
+            text:
+                "Ver Clientes"
         
